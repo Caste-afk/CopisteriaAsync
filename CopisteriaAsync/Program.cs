@@ -13,9 +13,9 @@
                 stampanti.Add(new Stampante());
             }
             */
-            Stampante stampanti = new();
             Queue<Studente> studenti = new Queue<Studente>();
             SemaphoreSlim stampantiLibere = new SemaphoreSlim(3); // Supponiamo di avere 3 stampanti disponibili
+            Stampante stampanti = new(stampantiLibere);
             Assistente assistente = new(ref studenti, stampantiLibere, stampanti);
 
             Task t1 = assistente.studentiArrivano();

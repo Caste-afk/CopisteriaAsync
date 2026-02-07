@@ -23,7 +23,7 @@ namespace CopisteriaAsync
         {
             while (true)
             {
-                await Task.Delay(1000);
+                await Task.Delay(100);
                 await prendeCoda.WaitAsync();
                 try
                 {
@@ -69,17 +69,10 @@ namespace CopisteriaAsync
                 await stampantiLibere.WaitAsync();
                 //await CercaStampantiLibere(s);
                 //await stampanti.stampa(s);
-                try
+                Task.Run(async () =>
                 {
-                    Task.Run(async () =>
-                    {
-                        stampanti.stampa(s);
-                    });
-                }
-                finally
-                {
-                    stampantiLibere.Release();
-                }
+                    stampanti.stampa(s);
+                });
             }
         }
         /*
